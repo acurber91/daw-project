@@ -110,7 +110,7 @@ function greeter(person)
  
 // document.body.innerHTML = greeter(user);
 
-console.log("¡Hola mundo!")
+//console.log("¡Hola mundo!")
 
 window.onload = function () 
 {
