@@ -7,9 +7,9 @@
 =============================================================================*/
 
 //=======[ Settings, Imports & Data ]==========================================
-
-var PORT    = 3000;
-
+// Puerto donde se levantará la API de Express.
+var PORT = 3000;
+// Para levantar Express, importamos su módulo.
 var express = require('express');
 var app = express();
 var mysql = require('./mysql-connector');
@@ -35,7 +35,7 @@ app.get('/devices/', function(req, res, next) {
 });
 
 app.get('/devices/:id', function(req, res, next) {
-    conexionMySql.query('SELECT * FROM Devices WHERE id=?',[req.params.id],function(err, respuesta){
+    conexionMySql.query('SELECT * FROM Devices WHERE id = ?', [req.params.id], function(err, respuesta){
         if(err) // Error en MySQL
         {
             res.send(err).status(400);
@@ -47,7 +47,7 @@ app.get('/devices/:id', function(req, res, next) {
 
 // Espera recibir algo del estilo {id: 1, state: 1}.
 app.post('/devices/', function(req, res){
-    conexionMySql.query('UPDATE Devices SET state=? WHERE id=?',[req.body.state, req.body.id],function(err, respuesta){
+    conexionMySql.query('UPDATE Devices SET state = ? WHERE id = ?', [req.body.state, req.body.id], function(err, respuesta){
         if(err) // Error en MySQL
         {
             res.send(err).status(400);
@@ -57,8 +57,9 @@ app.post('/devices/', function(req, res){
     });
 });
 
+// Se asocia la API de Express al puerto especificado.
 app.listen(PORT, function(req, res) {
-    console.log("NodeJS API running correctly");
+    console.log("¡NodeJS API corriendo correctamente!");
 });
 
 //=======[ End of file ]=======================================================

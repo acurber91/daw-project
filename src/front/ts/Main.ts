@@ -26,8 +26,7 @@ class Main implements EventListenerObject, GETResponseListener, POSTResponseList
     {
         this.myf = new MyFramework();
         this.view = new ViewMainPage(this.myf);
-        // Ejercicio 5 
-        this.myf.requestGET("Devices.txt", this);
+        this.myf.requestGET("http://localhost:8000/devices", this);
     }
 
     handleEvent(evt:Event):void
@@ -43,9 +42,14 @@ class Main implements EventListenerObject, GETResponseListener, POSTResponseList
         }
         else
         {
+            // Recuperamos el estado actual del switch.
             let state:boolean = this.view.getSwitchStateById(b.id);
-            let data = { "id":`${this.counter}`, "state":state}
-            this.myf.requestPOST("Devices.php", data, this);
+            // Recuperamos el "id" del switch para poder actualizar el registro en el backend.
+            let switchId:string = b.id.substr(b.id.indexOf("_") + 1, b.id.length - 4);
+            // Armamos el paquete de datos para enviar en el POST.
+            let data = {"id":switchId, "state":state}
+            // Enviamos el POST al backend.
+            this.myf.requestPOST("http://localhost:8000/devices", data, this);
         }       
     }
 
