@@ -16,9 +16,6 @@ interface DeviceInt
     type: string;
 }
 
-
-let user = "TypesScript Users!";
-// Ejercicio 2
 class Main implements EventListenerObject, GETResponseListener, POSTResponseListener
 {
     myf:MyFramework;
@@ -27,35 +24,10 @@ class Main implements EventListenerObject, GETResponseListener, POSTResponseList
 
     main():void 
     {
-        console.log("Soy un mensaje dentro del main.");
-        let usuarios:Array<User>;
-        usuarios = new Array<User>();
-        usuarios.push(new User(1, "Carlos", "carlos@gmail.com"));
-        usuarios.push(new User(2, "Pedro", "pedro@gmail.com"));
-        usuarios.push(new User(3, "Juan", "juan@gmail.com"));
-
-        this.mostrarUsers(usuarios);
-
         this.myf = new MyFramework();
         this.view = new ViewMainPage(this.myf);
-        let b:HTMLElement = this.myf.getElementById("boton");
-        b.textContent = "Prueba";
         // Ejercicio 5 
-        b.addEventListener("click", this);
         this.myf.requestGET("Devices.txt", this);
-    }
-
-    mostrarUsers(users:Array<User>):void
-    {
-        for(let i in users)
-        {
-            users[i].printInfo();
-        }
-        // Otra forma de iterar en TypeScript en objetos iterables.
-        // for (let o of users)
-        // {
-        //      o.printInfo();
-        // }
     }
 
     handleEvent(evt:Event):void
@@ -102,15 +74,6 @@ class Main implements EventListenerObject, GETResponseListener, POSTResponseList
 }
 
 //=======[ Main module code ]==================================================
-
-function greeter(person) 
-{
-    return "Hello, " + person;
-}
- 
-// document.body.innerHTML = greeter(user);
-
-//console.log("¡Hola mundo!")
 
 window.onload = function () 
 {

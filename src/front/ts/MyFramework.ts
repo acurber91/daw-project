@@ -1,8 +1,10 @@
+// Interfaz para definir el handler que atenderá el método GET.
 interface GETResponseListener
 {
     handleGETResponse(status:number, response:string):void;
 }
 
+// Interfaz para definir el handler que atenderá el método POST.
 interface POSTResponseListener
 {
     handlePOSTResponse(status:number, response:string):void;
@@ -67,13 +69,7 @@ class MyFramework
         };
 
         xhr.open('POST', url);
-
-        let formData:FormData = new FormData();
-        for (let key in data)
-        {
-            formData.append(key, data[key]);
-        }
-
-        xhr.send(formData);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8"); 
+        xhr.send(JSON.stringify(data));
     }
 }
