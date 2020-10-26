@@ -24,7 +24,7 @@ var conexionMySql = require('./mysql-connector');
 //=======[ Main module code ]==================================================
 
 app.get('/devices/', function(req, res, next) {
-    conexionMySql.query('SELECT * FROM Devices',function(err, respuesta){
+    conexionMySql.query('SELECT * FROM Devices', function(err, respuesta){
         if(err) // Error en MySQL
         {
             res.send(err).status(400);
@@ -45,16 +45,33 @@ app.get('/devices/:id', function(req, res, next) {
     });
 })
 
-// Espera recibir algo del estilo {id: 1, state: 1}.
+// Espera recibir algo del estilo {id: X, state: X, percent: X}.
 app.post('/devices/', function(req, res){
-    conexionMySql.query('UPDATE Devices SET state = ? WHERE id = ?', [req.body.state, req.body.id], function(err, respuesta){
-        if(err) // Error en MySQL
-        {
-            res.send(err).status(400);
-            return;
-        }
-        res.send("Se actualizó correctamente: " + JSON.stringify(respuesta)).status(200);
-    });
+    var obj = JSON.parse(JSON.stringify(req.body));
+    if(obj.hasOwnProperty("state"))
+    {
+        conexionMySql.query('UPDATE Devices SET state = ? WHERE id = ?', [req.body.state, req.body.id], function(err, respuesta){
+            if(err) // Error en MySQL
+            {
+                res.send(err).status(400);
+                return;
+            }
+            //res.send("Se actualizó correctamente: " + JSON.stringify(respuesta)).status(200);
+            res.send("Se recibió: " + JSON.stringify(respuesta)).status(200);
+        });
+    }
+    else if (obj.hasOwnProperty("percent"))
+    {
+        conexionMySql.query('UPDATE Devices SET percent = ? WHERE id = ?', [req.body.percent, req.body.id], function(err, respuesta){
+            if(err) // Error en MySQL
+            {
+                res.send(err).status(400);
+                return;
+            }
+            //res.send("Se actualizó correctamente: " + JSON.stringify(respuesta)).status(200);
+            res.send("Se recibió: " + JSON.stringify(respuesta)).status(200);
+        });
+    }
 });
 
 // Se asocia la API de Express al puerto especificado.

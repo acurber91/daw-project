@@ -12,40 +12,121 @@ class ViewMainPage
         let e: HTMLElement = this.myf.getElementById("devicesList");
         for (let dev of list)
         {
-            let image = "lightbulb.png";
-            if (dev.type == "1")
+            // Seleccionamos el ícono de cada uno de los dispositivos.
+            let icon = "";
+            switch (dev.appliance)
             {
-                image = "window.png";
-            }
+                case (0):
+                {
+                    icon = "lightbulb_outline";
+                    break;
+                }
+                case (1):
+                {
+                    icon = "ac_unit";
+                    break;
+                }
+                case (2):
+                {
+                    icon = "music_note";
+                    break;
+                }
+                case (3):
+                {
+                    icon = "kitchen";
+                    break;
+                }
+                case (4):
+                {
+                    icon = "tv";
+                    break;
+                }
+                case (5):
+                {
+                    icon = "toys";
+                    break;
+                }
+                case (6):
+                {
+                    icon = "power";
+                    break;
+                }
+                default:
+                {
+                    icon = "not_interested";
+                    break;
+                }
+            }            
 
-            let state = "";
-            if (dev.state == "1")
+            if (dev.type == 0)
             {
-                state = "checked";
+                // Se consulta el estado del switch en la base de datos.
+                let state = "";
+                if(dev.state == 1)
+                {
+                    state = "checked";
+                }
+                
+                e.innerHTML += `<div class="col s3">
+                                    <div class="card blue darken-3">
+                                        <div class="card-content white-text">
+                                            <i class="small material-icons" style="margin-left: -5px;">${icon}</i>
+                                            <a class="btn-floating btn-small waves-effect waves-light teal lighten-1" id="edi_${dev.id}" style="margin-left: 150px; margin-top: -20px;" title="Editar"><i class="material-icons">mode_edit</i></a>
+                                            <a class="btn-floating btn-small waves-effect waves-light teal lighten-1" id="del_${dev.id}" style="margin-top: -20px;" title="Eliminar"><i class="material-icons">delete</i></a>
+                                            <span class="card-title"><b><b>${dev.name}</b></b></span>
+                                            <p>${dev.description}</p>
+                                            <br>
+                                            <div class="switch">
+                                            <label>
+                                                <input id="dev_${dev.id}" type="checkbox" ${state}>
+                                                <span class="lever" style="margin-left: 0px;"></span>
+                                            </label>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>`;
             }
-            
-            e.innerHTML +=  `<li class="collection-item avatar">
-                            <img src="static/images/${image}" alt="" class="circle">
-                            <span class="title">${dev.name}</span>
-                            <p>${dev.description}</p>
-                            <a href="#!" class="secondary-content">
-                                <div class="switch">
-                                    <label>
-                                    Off
-                                    <input id="dev_${dev.id}" type="checkbox" ${state}>
-                                    <span class="lever"></span>
-                                    On
-                                    </label>
-                                </div>
-                            </a>
-                        </li>`;
+            else
+            {            
+                e.innerHTML += `<div class="col s3">
+                                    <div class="card blue darken-3">
+                                        <div class="card-content white-text">
+                                            <i class="small material-icons" style="margin-left: -5px;">${icon}</i>
+                                            <a class="btn-floating btn-small waves-effect waves-light teal lighten-1" id="edi_${dev.id}" style="margin-left: 150px; margin-top: -20px;" title="Editar"><i class="material-icons">mode_edit</i></a>
+                                            <a class="btn-floating btn-small waves-effect waves-light teal lighten-1" id="del_${dev.id}"style="margin-top: -20px;" title="Eliminar"><i class="material-icons">delete</i></a>
+                                            <span class="card-title"><b><b>${dev.name}</b></b></span>
+                                            <p>${dev.description}</p>
+                                            <br>
+                                            <form action="#">
+                                                <p class="range-field">
+                                                    <input type="range" id="sli_${dev.id}" min="0" max="100" value="${dev.percent}"/>
+                                                </p>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>`;
+            }
         }
     }
 
-    getSwitchStateById(id:string):boolean
+    getSwitchStateById(id:string):number
     {
         let e:HTMLElement = this.myf.getElementById(id);
         let i:HTMLInputElement = <HTMLInputElement> e;
-        return i.checked;
+        if(i.checked == true)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    
+    getRangeValueById(id:string):number
+    {
+        let e:HTMLElement = this.myf.getElementById(id);
+        let i:HTMLInputElement =  <HTMLInputElement> e;
+        return Number(i.value);
     }
 }

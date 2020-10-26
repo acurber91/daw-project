@@ -71,5 +71,6 @@ class MyFramework
         xhr.open('POST', url);
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8"); 
         xhr.send(JSON.stringify(data));
+        console.log(JSON.stringify(data));
     }
 }
