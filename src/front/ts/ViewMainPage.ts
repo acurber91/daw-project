@@ -71,8 +71,6 @@ class ViewMainPage
                                     <div class="card blue darken-3">
                                         <div class="card-content white-text">
                                             <i class="small material-icons" style="margin-left: -5px;">${icon}</i>
-                                            <a class="btn-floating btn-small waves-effect waves-light teal lighten-1" id="edi_${dev.id}" style="margin-left: 150px; margin-top: -20px;" title="Editar"><i class="material-icons">mode_edit</i></a>
-                                            <a class="btn-floating btn-small waves-effect waves-light teal lighten-1" id="del_${dev.id}" style="margin-top: -20px;" title="Eliminar"><i class="material-icons">delete</i></a>
                                             <span class="card-title"><b><b>${dev.name}</b></b></span>
                                             <p>${dev.description}</p>
                                             <br>
@@ -81,6 +79,10 @@ class ViewMainPage
                                                 <input id="dev_${dev.id}" type="checkbox" ${state}>
                                                 <span class="lever" style="margin-left: 0px;"></span>
                                             </label>
+                                            <div class="card-action">
+                                                <a href="#" id="edi_${dev.id}">Editar</a>
+                                                <a href="#" id="del_${dev.id}">Eliminar</a>
+                                          </div>
                                         </div>
                                         </div>
                                     </div>
@@ -92,8 +94,6 @@ class ViewMainPage
                                     <div class="card blue darken-3">
                                         <div class="card-content white-text">
                                             <i class="small material-icons" style="margin-left: -5px;">${icon}</i>
-                                            <a class="btn-floating btn-small waves-effect waves-light teal lighten-1" id="edi_${dev.id}" style="margin-left: 150px; margin-top: -20px;" title="Editar"><i class="material-icons">mode_edit</i></a>
-                                            <a class="btn-floating btn-small waves-effect waves-light teal lighten-1" id="del_${dev.id}"style="margin-top: -20px;" title="Eliminar"><i class="material-icons">delete</i></a>
                                             <span class="card-title"><b><b>${dev.name}</b></b></span>
                                             <p>${dev.description}</p>
                                             <br>
@@ -102,6 +102,10 @@ class ViewMainPage
                                                     <input type="range" id="sli_${dev.id}" min="0" max="100" value="${dev.percent}"/>
                                                 </p>
                                             </form>
+                                            <div class="card-action">
+                                                <a href="#" id="edi_${dev.id}">Editar</a>
+                                                <a href="#" id="del_${dev.id}">Eliminar</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>`;

@@ -4908,9 +4908,10 @@ small {
 
 .card .card-action {
   background-color: inherit;
-  border-top: 1px solid rgba(160, 160, 160, 0.2);
+  /*border-top: 1px solid rgba(160, 160, 160, 0.2);*/
   position: relative;
-  padding: 16px 24px;
+  margin-top: 10%;
+  /*padding: 16px 24px;*/
 }
 
 .card .card-action:last-child {
@@ -4918,7 +4919,7 @@ small {
 }
 
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
-  color: #ffab40;
+  color: #ffffff;
   margin-right: 24px;
   -webkit-transition: color .3s ease;
   transition: color .3s ease;
@@ -4926,7 +4927,7 @@ small {
 }
 
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating):hover {
-  color: #ffd8a6;
+  color: #84c7c1;
 }
 
 .card .card-reveal {
@@ -5755,6 +5756,7 @@ body.keyboard-focused .dropdown-content li:focus {
 .modal {
   display: none;
   position: fixed;
+  z-index: 999;
   left: 0;
   right: 0;
   background-color: #fafafa;

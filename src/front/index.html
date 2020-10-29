@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html>    
     <head>
         <!--Import Google Icon Font-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -34,7 +34,7 @@
             <div class="container">
                 <div id="hola" class="row">
                     <div class="col s4">
-                        <a class="waves-effect waves-light btn"><i class="material-icons left">add</i>AGREGAR DISPOSITIVOS</a>
+                        <a class="waves-effect waves-light btn modal-trigger" href="#modal_add"><i class="material-icons left">add</i>AGREGAR DISPOSITIVOS</a>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,57 @@
                 <div id="devicesList" class="row">
                 </div>
             </div>
-        </main>	
+        </main>
+
+        <!-- Modal for adding new devices -->
+        <div id="modal_add" class="modal">
+            <div class="modal-content">
+                <h5>Agregar dispositivo</h5>
+                <p>Complete los datos para identificar al dispositivo en la aplicación:</p>
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="Cocina" id="add_name" type="text" class="validate">
+                                <label for="add_name">Nombre</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input placeholder="Luz principal de la cocina" id="add_description" type="text" class="validate">
+                                <label for="add_description">Descripción</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <p>Seleccione la funcionalidad del dispositivo:</p>
+                                <select id="feature" class="browser-default">
+                                  <option value="" disabled selected>Funcionalidad</option>
+                                  <option value="0">On/Off</option>
+                                  <option value="1">Dimerizable</option>
+                                </select>
+                            </div>
+                            <div class="input-field col s6">
+                                <p>Seleccione el tipo de dispositivo:</p>
+                                <select id="appliance" class="browser-default">
+                                    <option value="" disabled selected>Tipo de dispositivo</option>
+                                    <option value="0">Lámpara</option>
+                                    <option value="1">Aire acondicionado</option>
+                                    <option value="2">Equipo de música</option>
+                                    <option value="3">Heladera</option>
+                                    <option value="4">Televisión</option>
+                                    <option value="5">Ventilador</option>
+                                    <option value="6">Enchufe</option>
+                                </select>                            
+                            </div>
+                        </div>
+                    </form>
+                  </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" id="add_dev" class="modal-close waves-effect waves-green btn-flat">Agregar</a>
+            </div>
+        </div>
+
+        
         <!-- Page Footer -->
         <footer class="page-footer" style="background-color:#1565c0">
             <div class="container">
@@ -68,4 +118,16 @@
         <script type="text/javascript" src="js/MyFramework.js"></script>
         <script type="text/javascript" src="js/ViewMainPage.js"></script>
     </body>
+            <!-- Modal Structure -->
+            <div id="modal1" class="modal">
+                <div class="modal-content">
+                    <h4>Modal Header</h4>
+                    <p>A bunch of text</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                </div>
+            </div>
+
 </html>
+

@@ -45,33 +45,81 @@ app.get('/devices/:id', function(req, res, next) {
     });
 })
 
-// Espera recibir algo del estilo {id: X, state: X, percent: X}.
 app.post('/devices/', function(req, res){
+    
+    // Declaramos un objeto para almacenar el JSON que se recibe en el POST.
     var obj = JSON.parse(JSON.stringify(req.body));
-    if(obj.hasOwnProperty("state"))
+    
+    // Declaramos una variable para contar.
+    var count = 0;
+
+    // Y registramos la cantidad de keys que contiene el JSON en cuestión.
+    for(var key in obj)
     {
-        conexionMySql.query('UPDATE Devices SET state = ? WHERE id = ?', [req.body.state, req.body.id], function(err, respuesta){
+        if(obj.hasOwnProperty(key))
+        {
+            count++;
+        }
+    }
+
+    // En base a la cantidad de keys, sabemos si se modifica un actuador o si se agrega/edita un dispositivo.
+    // En este primer caso, se modifica un actuador.
+    if(count <= 2)
+    {
+        // Este primer caso atiende un actuador del tipo switch.
+        if(obj.hasOwnProperty("state"))
+        {
+            console.log("Entre al primer caso");
+            conexionMySql.query('UPDATE Devices SET state = ? WHERE id = ?', [req.body.state, req.body.id], function(err, respuesta){
+                if(err) // Error en MySQL
+                {
+                    res.send(err).status(400);
+                    return;
+                }
+                res.send("Se actualizó correctamente: " + JSON.stringify(respuesta)).status(200);
+            });
+        }
+        // Este segundo caso atiende un actuador del tipo rango.
+        else
+        {
+            console.log("Entre al segundo caso");
+            conexionMySql.query('UPDATE Devices SET percent = ? WHERE id = ?', [req.body.percent, req.body.id], function(err, respuesta){
+                if(err) // Error en MySQL
+                {
+                    res.send(err).status(400);
+                    return;
+                }
+                res.send("Se actualizó correctamente: " + JSON.stringify(respuesta)).status(200);
+            });
+        }
+    }
+    
+    // En este caso, la cuenta es superior a 2, por lo que se está agregando o editando un dispositivo.
+    else
+    {
+        console.log("Entre al ultimo caso");
+        conexionMySql.query('INSERT INTO Devices (name, description, state, type, percent, appliance) VALUES (?, ?, ?, ?, ?, ?)', [req.body.name, req.body.description, req.body.state, req.body.type, req.body.percent, req.body.appliance], function(err, respuesta){
             if(err) // Error en MySQL
             {
                 res.send(err).status(400);
                 return;
             }
-            //res.send("Se actualizó correctamente: " + JSON.stringify(respuesta)).status(200);
-            res.send("Se recibió: " + JSON.stringify(respuesta)).status(200);
+            res.send("Se actualizó correctamente: " + JSON.stringify(respuesta)).status(200);
         });
     }
-    else if (obj.hasOwnProperty("percent"))
-    {
-        conexionMySql.query('UPDATE Devices SET percent = ? WHERE id = ?', [req.body.percent, req.body.id], function(err, respuesta){
-            if(err) // Error en MySQL
-            {
-                res.send(err).status(400);
-                return;
-            }
-            //res.send("Se actualizó correctamente: " + JSON.stringify(respuesta)).status(200);
-            res.send("Se recibió: " + JSON.stringify(respuesta)).status(200);
-        });
-    }
+});
+
+// Espera recibir algo del estilo {id: X}.
+app.delete('/devices/', function(req, res){
+    /*conexionMySql.query('DELETE FROM Devices WHERE id = ?', [req.body.id], function(err, respuesta){
+        if(err) // Error en MySQL
+        {
+            res.send(err).status(400);
+            return;
+        }
+        res.send("Se actualizó correctamente: " + JSON.stringify(respuesta)).status(200);
+    });*/
+    res.send('Got a DELETE request at /user');
 });
 
 // Se asocia la API de Express al puerto especificado.

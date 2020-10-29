@@ -71,6 +71,31 @@ class MyFramework
         xhr.open('POST', url);
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8"); 
         xhr.send(JSON.stringify(data));
-        console.log(JSON.stringify(data));
+    }
+
+    requestDELETE(url:string, data:object, listener:POSTResponseListener):void
+    {
+        let xhr: XMLHttpRequest;
+        xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function()
+        {
+            if(xhr.readyState == 4)
+            {
+                if(xhr.status == 200)
+                {
+                    listener.handlePOSTResponse(xhr.status, xhr.responseText);
+                }
+                else
+                {
+                    listener.handlePOSTResponse(xhr.status, null);
+                }
+            }
+        };
+
+        xhr.open('DELETE', url, true);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8"); 
+        xhr.send(JSON.stringify(data));
+        console.log(data);
     }
 }
