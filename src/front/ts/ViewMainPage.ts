@@ -33,27 +33,22 @@ class ViewMainPage
                 }
                 case (3):
                 {
-                    icon = "kitchen";
+                    icon = "tv";
                     break;
                 }
                 case (4):
                 {
-                    icon = "tv";
+                    icon = "toys";
                     break;
                 }
                 case (5):
                 {
-                    icon = "toys";
-                    break;
-                }
-                case (6):
-                {
-                    icon = "power";
+                    icon = "outlet";
                     break;
                 }
                 default:
                 {
-                    icon = "not_interested";
+                    icon = "cancel";
                     break;
                 }
             }            
@@ -70,9 +65,9 @@ class ViewMainPage
                 e.innerHTML += `<div class="col s3">
                                     <div class="card blue darken-3">
                                         <div class="card-content white-text">
-                                            <i class="small material-icons" style="margin-left: -5px;">${icon}</i>
-                                            <span class="card-title"><b><b>${dev.name}</b></b></span>
-                                            <p>${dev.description}</p>
+                                            <i id="icon_${dev.id}" class="small material-icons" style="margin-left: -5px;">${icon}</i>
+                                            <span id="nameDev_${dev.id}" class="card-title"><b><b>${dev.name}</b></b></span>
+                                            <p id="descriptionDev_${dev.id}">${dev.description}</p>
                                             <br>
                                             <div class="switch">
                                             <label>
@@ -80,8 +75,8 @@ class ViewMainPage
                                                 <span class="lever" style="margin-left: 0px;"></span>
                                             </label>
                                             <div class="card-action">
-                                                <a href="#" id="edi_${dev.id}">Editar</a>
-                                                <a href="#" id="del_${dev.id}">Eliminar</a>
+                                                <a class="modal-trigger" href="#modal3" id="edi_${dev.id}">Editar</a>
+                                                <a class="modal-trigger" href="#modal2" id="del_${dev.id}">Eliminar</a>
                                           </div>
                                         </div>
                                         </div>
@@ -93,9 +88,9 @@ class ViewMainPage
                 e.innerHTML += `<div class="col s3">
                                     <div class="card blue darken-3">
                                         <div class="card-content white-text">
-                                            <i class="small material-icons" style="margin-left: -5px;">${icon}</i>
-                                            <span class="card-title"><b><b>${dev.name}</b></b></span>
-                                            <p>${dev.description}</p>
+                                            <i id="icon_${dev.id}" class="small material-icons" style="margin-left: -5px;">${icon}</i>
+                                            <span id="nameDev_${dev.id}" class="card-title"><b><b>${dev.name}</b></b></span>
+                                            <p id="descriptionDev_${dev.id}">${dev.description}</p>
                                             <br>
                                             <form action="#">
                                                 <p class="range-field">
@@ -103,8 +98,8 @@ class ViewMainPage
                                                 </p>
                                             </form>
                                             <div class="card-action">
-                                                <a href="#" id="edi_${dev.id}">Editar</a>
-                                                <a href="#" id="del_${dev.id}">Eliminar</a>
+                                                <a class="modal-trigger" href="#modal3" id="edi_${dev.id}">Editar</a>
+                                                <a class="modal-trigger" href="#modal2" id="del_${dev.id}">Eliminar</a>
                                             </div>
                                         </div>
                                     </div>
