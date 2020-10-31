@@ -1,3 +1,12 @@
+/*=============================================================================
+ * Author: Agustín Curcio Berardi based on the example project written by 
+   Agustin Bassi, Brian Ducca and Santiago Germino.
+ * Date: October 2020
+ * Licence: GPLV3+
+ * Project: Trabajo Práctico Final - DAW - CEIoT
+ * Brief: MyFramework class definition.
+=============================================================================*/
+
 // Interfaz para definir el handler que atenderá el método GET.
 interface GETResponseListener
 {
@@ -24,6 +33,7 @@ class MyFramework
         return <HTMLElement>evt.target;
     }
 
+    // Implementación para soportar el request HTTP del tipo GET.
     requestGET(url:string, listener:GETResponseListener):void
     {
         let xhr: XMLHttpRequest;
@@ -48,6 +58,7 @@ class MyFramework
         xhr.send(null);
     }
 
+    // Implementación para soportar el request HTTP del tipo POST.
     requestPOST(url:string, data:object, listener:POSTResponseListener):void
     {
         let xhr: XMLHttpRequest;
@@ -72,7 +83,8 @@ class MyFramework
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8"); 
         xhr.send(JSON.stringify(data));
     }
-
+    
+    // Implementación para soportar el request HTTP del tipo DELETE.
     requestDELETE(url:string, data:object, listener:POSTResponseListener):void
     {
         let xhr: XMLHttpRequest;
@@ -96,6 +108,5 @@ class MyFramework
         xhr.open('DELETE', url, true);
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8"); 
         xhr.send(JSON.stringify(data));
-        console.log(data);
     }
 }

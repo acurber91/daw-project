@@ -1,9 +1,10 @@
 /*=============================================================================
- * Authors: Agustin Bassi, Brian Ducca, Santiago Germino 
- * Date: Jul 2020
+ * Author: Agustín Curcio Berardi based on the example project written by 
+   Agustin Bassi, Brian Ducca and Santiago Germino.
+ * Date: October 2020
  * Licence: GPLV3+
- * Project: DAW - CEIoT - Project Structure
- * Brief: Main backend file
+ * Project: Trabajo Práctico Final - DAW - CEIoT
+ * Brief: Main backend implementation.
 =============================================================================*/
 
 //=======[ Settings, Imports & Data ]==========================================
@@ -23,6 +24,7 @@ var conexionMySql = require('./mysql-connector');
 
 //=======[ Main module code ]==================================================
 
+// Direccionamiento para solicitudes HTTP del tipo GET.
 app.get('/devices/', function(req, res, next) {
     conexionMySql.query('SELECT * FROM Devices', function(err, respuesta){
         if(err) // Error en MySQL
@@ -34,6 +36,7 @@ app.get('/devices/', function(req, res, next) {
     });
 });
 
+// Direccionamiento para solicitudes HTTP del tipo GET con envío de datos a través de la URI.
 app.get('/devices/:id', function(req, res, next) {
     conexionMySql.query('SELECT * FROM Devices WHERE id = ?', [req.params.id], function(err, respuesta){
         if(err) // Error en MySQL
@@ -45,6 +48,7 @@ app.get('/devices/:id', function(req, res, next) {
     });
 })
 
+// Direccionamiento para solicitudes HTTP del tipo GET.
 app.post('/devices/', function(req, res){
     
     // Declaramos un objeto para almacenar el JSON que se recibe en el POST.
@@ -62,14 +66,42 @@ app.post('/devices/', function(req, res){
         }
     }
 
-    // En base a la cantidad de keys, sabemos si se modifica un actuador o si se agrega/edita un dispositivo.
-    // En este primer caso, se modifica un actuador.
-    if(count == 2)
+    // En base a la cantidad de keys que contiene el archivo JSON, sabemos si se modifica un actuador o si se agrega/edita un dispositivo.
+    switch(count)
     {
-        // Este primer caso atiende un actuador del tipo switch.
-        if(obj.hasOwnProperty("state"))
+        // Si el JSON contiene dos keys, se trata de un cambio en un switch o slider.
+        case(2):
         {
-            conexionMySql.query('UPDATE Devices SET state = ? WHERE id = ?', [req.body.state, req.body.id], function(err, respuesta){
+            // Este primer caso atiende el caso del switch.
+            if(obj.hasOwnProperty("state"))
+            {
+                conexionMySql.query('UPDATE Devices SET state = ? WHERE id = ?', [req.body.state, req.body.id], function(err, respuesta){
+                    if(err) // Error en MySQL
+                    {
+                        res.send(err).status(400);
+                        return;
+                    }
+                    res.send("Se actualizó correctamente: " + JSON.stringify(respuesta)).status(200);
+                });
+            }
+            // Este primer caso atiende el caso del slider.
+            else
+            {
+                conexionMySql.query('UPDATE Devices SET percent = ? WHERE id = ?', [req.body.percent, req.body.id], function(err, respuesta){
+                    if(err) // Error en MySQL
+                    {
+                        res.send(err).status(400);
+                        return;
+                    }
+                    res.send("Se actualizó correctamente: " + JSON.stringify(respuesta)).status(200);
+                });
+            }
+            break;
+        }
+        // Si el JSON contiene cinco keys, se trata de una edición de un dispositivo existente.
+        case(5):
+        {
+            conexionMySql.query('UPDATE Devices SET name = ?, description = ?, type = ?, appliance = ? WHERE id = ?', [req.body.name, req.body.description, req.body.type, req.body.appliance, req.body.id], function(err, respuesta){
                 if(err) // Error en MySQL
                 {
                     res.send(err).status(400);
@@ -77,11 +109,12 @@ app.post('/devices/', function(req, res){
                 }
                 res.send("Se actualizó correctamente: " + JSON.stringify(respuesta)).status(200);
             });
+            break;
         }
-        // Este segundo caso atiende un actuador del tipo rango.
-        else
+        // Por último, si el JSON contiene seis keys, se trata de una adición de nuevo dispositivo.
+        case(6):
         {
-            conexionMySql.query('UPDATE Devices SET percent = ? WHERE id = ?', [req.body.percent, req.body.id], function(err, respuesta){
+            conexionMySql.query('INSERT INTO Devices (name, description, state, type, percent, appliance) VALUES (?, ?, ?, ?, ?, ?)', [req.body.name, req.body.description, req.body.state, req.body.type, req.body.percent, req.body.appliance], function(err, respuesta){
                 if(err) // Error en MySQL
                 {
                     res.send(err).status(400);
@@ -89,37 +122,16 @@ app.post('/devices/', function(req, res){
                 }
                 res.send("Se actualizó correctamente: " + JSON.stringify(respuesta)).status(200);
             });
+            break;
         }
-    }
-    
-    // En este caso, la cuenta es superior a 2, por lo que se está agregando o editando un dispositivo.
-    else if (count == 6)
-    {
-        conexionMySql.query('INSERT INTO Devices (name, description, state, type, percent, appliance) VALUES (?, ?, ?, ?, ?, ?)', [req.body.name, req.body.description, req.body.state, req.body.type, req.body.percent, req.body.appliance], function(err, respuesta){
-            if(err) // Error en MySQL
-            {
-                res.send(err).status(400);
-                return;
-            }
-            res.send("Se actualizó correctamente: " + JSON.stringify(respuesta)).status(200);
-        });
-    }
-
-    else
-    {
-        console.log("Entre a la edición");
-        conexionMySql.query('UPDATE Devices SET name = ?, description = ?, type = ?, appliance = ? WHERE id = ?', [req.body.name, req.body.description, req.body.type, req.body.appliance, req.body.id], function(err, respuesta){
-            if(err) // Error en MySQL
-            {
-                res.send(err).status(400);
-                return;
-            }
-            res.send("Se actualizó correctamente: " + JSON.stringify(respuesta)).status(200);
-        });
+        default:
+        {
+            break;
+        }
     }
 });
 
-// Espera recibir algo del estilo {id: X}.
+// Direccionamiento para solicitudes HTTP del tipo DELETE.
 app.delete('/devices/', function(req, res){
     conexionMySql.query('DELETE FROM Devices WHERE id = ?', [req.body.id], function(err, respuesta){
         if(err) // Error en MySQL

@@ -1,3 +1,12 @@
+/*=============================================================================
+ * Author: Agustín Curcio Berardi based on the example project written by 
+   Agustin Bassi, Brian Ducca and Santiago Germino.
+ * Date: October 2020
+ * Licence: GPLV3+
+ * Project: Trabajo Práctico Final - DAW - CEIoT
+ * Brief: ViewMainPage class definition.
+=============================================================================*/
+
 class ViewMainPage
 {
     private myf: MyFramework;
@@ -129,3 +138,5 @@ class ViewMainPage
         return Number(i.value);
     }
 }
+
+//=======[ End of file ]=======================================================
