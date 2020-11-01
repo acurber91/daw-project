@@ -16,6 +16,8 @@ class ViewMainPage
         this.myf = myf;
     }
     
+    // Función que muestra los dispositivos de forma dinámica en base a la información 
+    // almacenda en la base de datos.
     showDevices(list: DeviceInt[]):void
     {
         let e: HTMLElement = this.myf.getElementById("devicesList");
@@ -55,6 +57,11 @@ class ViewMainPage
                     icon = "outlet";
                     break;
                 }
+                case (6):
+                {
+                    icon = "sensor_window";
+                    break;
+                }
                 default:
                 {
                     icon = "cancel";
@@ -62,6 +69,7 @@ class ViewMainPage
                 }
             }            
 
+            // Si el tipo de dispositivo es igual a 0, entonces utiliza un switch (funcionalidad On/Off).
             if (dev.type == 0)
             {
                 // Se consulta el estado del switch en la base de datos.
@@ -92,6 +100,7 @@ class ViewMainPage
                                     </div>
                                 </div>`;
             }
+            // Sino, se trata de un dispositivo dimerizable, por lo que es necesario mostrar el slider.
             else
             {            
                 e.innerHTML += `<div class="col s3">
@@ -117,6 +126,7 @@ class ViewMainPage
         }
     }
 
+    // Fucnión para recuperar el estado del switch.
     getSwitchStateById(id:string):number
     {
         let e:HTMLElement = this.myf.getElementById(id);
@@ -131,6 +141,7 @@ class ViewMainPage
         }
     }
     
+    // Fucnión para recuperar el estado del slider.
     getRangeValueById(id:string):number
     {
         let e:HTMLElement = this.myf.getElementById(id);

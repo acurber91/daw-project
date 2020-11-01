@@ -140,6 +140,12 @@ class Main implements EventListenerObject, GETResponseListener, POSTResponseList
                         break;
                     }
 
+                    case("sensor_window"):
+                    {
+                        (<HTMLInputElement>this.myf.getElementById('mod_appliance')).value = "6";
+                        break;
+                    }
+
                     default:
                     {
                         (<HTMLInputElement>this.myf.getElementById('mod_appliance')).value = "";
