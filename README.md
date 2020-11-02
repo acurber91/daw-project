@@ -264,7 +264,7 @@ Una vez iniciado, simplemente resta abrir una nueva pestaña en el navegador a e
 
 Para cerrar el contenedor, se puede correr el comando ``docker-compose down`` desde otra terminal o bien cerrar la pestaña del navegador y utilizar el shortcut ``Ctrl+C``, obteniendo el mismo resultado.
 
-> **NOTA**: La primera vez que se ejecuta el comando ``docker-compose up`` casi seguro que la base de datos MySQL arrojará un error. Si eso sucede, será necesario reiniciar el contenedor. Para ello, cerrarlo con ``docker-compose down`` y volver a iniciarlo con ``docker-compose up``.
+> **NOTA**: La primera vez que se ejecuta el comando ``docker-compose up`` casi seguro que la base de datos MySQL arrojará un error y en la aplicación no aparecerá ningún dispositivo, es decir, solo se mostrará el "cascarón". Si eso sucede, será necesario reiniciar el contenedor. Para ello, cerrarlo con ``docker-compose down`` y volver a iniciarlo con ``docker-compose up``.
 
 ## Licencia
 
