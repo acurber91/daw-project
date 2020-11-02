@@ -10,13 +10,13 @@
 //=======[ Settings, Imports & Data ]==========================================
 interface DeviceInt
 {
-    id: number;
-    name: string;
-    description: string;
-    state: number;
-    type: number;
-    percent: number;
-    appliance: number;
+    id: number;             // ID.
+    name: string;           // Nombre del dispositivo.
+    description: string;    // Descripción del dispositivo.
+    state: number;          // Estado del dispositivo (solo on/off).
+    type: number;           // Capacidad del dispositivo (on/off o dimerizable).
+    percent: number;        // Rango actual del dispositivo (solo dimerizable)
+    appliance: number;      // Tipo de dispositivo.
 }
 
 class Main implements EventListenerObject, GETResponseListener, POSTResponseListener

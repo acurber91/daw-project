@@ -21,7 +21,7 @@ Docentes:
 
 ## Introducción general
 
-El Trabajo Práctico Final de la materia Desarrollo de Aplicaciones Web consiste en el diseño de una "Single Page Application (SPA)" para poder controlar dispositivos inteligentes que pueden ser instalados en una casa. La propuesta consistió en aplicar los conceptos vistos en la materia para implementar nuevas funcionalidades a un ["template"](https://github.com/ce-iot/daw-project-template) utilizado en clase y que fue desarrollado por los docentes.
+El **Trabajo Práctico Final** de la materia **Desarrollo de Aplicaciones Web** consiste en el diseño de una "Single Page Application (SPA)" para poder controlar dispositivos inteligentes que pueden ser instalados en una casa. La propuesta consistió en aplicar los conceptos vistos en la materia para implementar nuevas funcionalidades a un ["template"](https://github.com/ce-iot/daw-project-template) utilizado en clase y que fue desarrollado por los docentes.
 
 ## Instalación de dependencias
 
@@ -111,11 +111,21 @@ Antes de poder ejecutar el contenedor del Trabajo Práctico Final, es necesario 
     docker pull phpmyadmin/phpmyadmin
     docker pull abassi/nodejs-server:10.0-dev
 
-## Introducción específica
+## Implementación
 
-La aplicación se ejecuta cuando un navegador se comunica con el servidor web mediante el envío de solicitudes HTTP. Dicho servidor utiliza la tecnología NodeJS para que, una vez establecida la conexión, se intercambien datos para que el navegador pueda presentar la aplicación web. La siguiente imagen muestra lo que vería el usuario al momento de ejecutarla.
+### Introducción específica
 
-## Organización del proyecto
+La aplicación **Device Dashboard** se ejecuta cuando un navegador se comunica con el servidor web mediante el envío de solicitudes HTTP. Dicho servidor utiliza la tecnología NodeJS para que, una vez establecida la conexión, se intercambien datos para que el navegador pueda presentar la aplicación web. La siguiente imagen muestra lo que vería el usuario al momento de ejecutarla.
+
+![Imagen de la aplicación.](doc/app-view.png)
+
+Para desarrollar el **"frontend"** de la aplicación se utilizó el lenguaje de programación **TypeScript**, que es un superconjunto de JavaScript y que esencialmente añade tipos estáticos y objetos basados en clases. Así, para poder generar código en JavaScript basta con compilar el código fuente escrito en TypeScript. Por otro lado, en cuanto al desarrollo del **"backend"** se utilizó **Express.js**, que tal cual su nombre lo indica es un "framework" de Node.js que es gratuito y "open source". A su vez, se implementó una base de datos **MySQL** junto con el motor de bases de datos **phpMyAdmin**.
+
+### Principio de funcionamiento
+
+Cuando el cliente solicita el sitio web a través de una solicitud del tipo GET, el servidor proporciona el archivo ``index.html`` para mostrar el "cascarón" de la aplicación junto con una serie de archivos JavaScript. El principal de ellos es el ``Main.js``, el cual implementa la funcionalidad que se requeriere para cargar contenido de forma dinámica y sin tener que refrescar la página web (el refresco se hace cuando se detecta un cambio de forma automática). ``Main.js`` utiliza funciones implementadas en los archivos ``MyFramework.js`` y ``ViewMainPage.js``. En el primer archivo se programaron las funciones que se necesitan para cargar el contenido en la aplicación, es decir, cada una de las cajas o "cards" que muestran el ícono del dispositivo, su nombre, descripción, actuador y opciones disponibles. El segundo archivo contiene las funciones que se encargan de interactuar con el "backend" de la aplicación y así poder realizar consultas, editar datos o incluso eliminarlos.
+
+### Organización del proyecto
 
 El proyecto se encuentra conformado por la siguiente estructura de directorios y archivos:
 
@@ -140,6 +150,12 @@ El proyecto se encuentra conformado por la siguiente estructura de directorios y
     ├── CHANGELOG.md                # Archivo para guardar cambios.
     ├── LICENSE.md                  # Archivo de licencia.
 
+### Desarrollo del "frontend"
+
+De acuerdo a las consignas del Trabajo Práctico Final, se implementaron las siguientes funcionalidades desde la perspectiva del "frontend":
+
+#### Edición de dispositivos existenes
+La propuesta consistía en 
 
 
 ## Licence
