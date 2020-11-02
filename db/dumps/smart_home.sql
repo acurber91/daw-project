@@ -51,7 +51,7 @@ INSERT INTO `Devices` (`id`, `name`, `description`, `state`, `type`, `percent`, 
 (2, 'Cocina', 'Luz principal de la cocina.', 1, 0, 0, 0),
 (3, 'Velador', 'Velador del dormitorio principal.', 0, 0, 0, 0),
 (4, 'Caloventor', 'Caloventor del dormitorio principal.', 0, 0, 0, 5),
-(5, 'Equipo de música', 'Equipo de música de la sala de estar.', 0, 0, 2),
+(5, 'Equipo de música', 'Equipo de música de la sala de estar.', 0, 0, 0, 2),
 (6, 'Televisión', 'Televisión de la sala de estar.', 0, 1, 0, 6),
 (7, 'Ventilador', 'Ventilador del dormitorio principal.', 0, 1, 0, 4),
 (8, 'Ventana', 'Ventana de la cocina.', 0, 1, 0, 6);
