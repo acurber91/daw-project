@@ -35,22 +35,26 @@ SET time_zone = "+00:00";
 CREATE TABLE `Devices` (
   `id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
-  `description` varchar(128) NOT NULL,
+  `description` varchar(255) NOT NULL,
   `state` int(11) NOT NULL,
-  `type` int(11) NOT NULL
+  `type` int(11) NOT NULL,
+  `percent` int(11) NOT NULL,
+  `appliance` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Devices`
 --
 
-INSERT INTO `Devices` (`id`, `name`, `description`, `state`, `type`) VALUES
-(1, 'Lampara 1', 'Luz living', 1, 0),
-(2, 'Lampara 2', 'Luz cocina', 0, 0),
-(3, 'Velador', 'Velador living', 1, 0),
-(4, 'Persiana 1', 'Persiana living', 1, 1),
-(5, 'Persiana 2', 'Persiana de la cocina', 1, 1),
-(6, 'Persiana 3', 'Persiana balcon', 0, 1);
+INSERT INTO `Devices` (`id`, `name`, `description`, `state`, `type`, `percent`, `appliance`) VALUES
+(1, 'AC Cocina', 'Aire acondicionado de la cocina.', 0, 1, 0, 1),
+(2, 'Cocina', 'Luz principal de la cocina.', 1, 0, 0, 0),
+(3, 'Velador', 'Velador del dormitorio principal.', 0, 0, 0, 0),
+(4, 'Caloventor', 'Caloventor del dormitorio principal.', 0, 0, 5),
+(5, 'Equipo de música', 'Equipo de música de la sala de estar.', 0, 0, 2),
+(6, 'Televisión', 'Televisión de la sala de estar.', 0, 1, 0, 6),
+(7, 'Ventilador', 'Ventilador del dormitorio principal.', 0, 1, 0, 4),
+(8, 'Ventana', 'Ventana de la cocina.', 0, 1, 0, 6);
 
 --
 -- Indexes for dumped tables
