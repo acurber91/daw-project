@@ -16,8 +16,9 @@ Docentes:
 
 1. [Introducción general](#introducción)
 2. [Instalación de dependencias](#instalación-de-dependencias)
-3. [Third Example](#third-example)
-4. [Fourth Example](#fourth-examplehttpwwwfourthexamplecom)
+3. [Implementación](#implementación)
+4. [Ejecución de la aplicación](#ejecución-de-la-aplicación)
+5. [Licencia](#licencia)
 
 ## Introducción general
 
@@ -266,9 +267,8 @@ Para cerrar el contenedor, se puede correr el comando ``docker-compose down`` de
 
 > **NOTA**: La primera vez que se ejecuta el comando ``docker-compose up`` es posible que la base de datos MySQL arroje un error. En tal caso, será necesario cerrar el contenedor y volverlo a inicializar.
 
-## Licence
+## Licencia
 
-This project is published under GPLV3+ licence.
+Este proyecto se encuentra publicado bajo la licencia GPLV3+.
 
 ![footer](doc/footer.png)
-
