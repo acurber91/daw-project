@@ -237,7 +237,7 @@ Existen dos reglas que se deben considerar para comprender mejor como funciona l
 
 Por último, el campo ``appliance`` define con valores de 1 a 6 el tipo de dispositivo. Esta información es utilizada para mostrar el ícono correcto en cada dispositivo. El detalle se muestra en la siguiente tabla.
 
-| Appliance         | Descripción        | Tipo de dato                             |
+| Appliance         | Descripción        | Ícono                                    |
 | :---------------: |:------------------:|:----------------------------------------:|
 | 0                 | Lámpara            |![Lámpara.](doc/lightbulb_outline.png)    |
 | 1                 | Aire acondicionado |![Aire acondicionado.](doc/ac_unit.png)   |
