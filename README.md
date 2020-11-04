@@ -119,7 +119,7 @@ La aplicación **Device Dashboard** se ejecuta cuando un navegador se comunica c
 
 ![Imagen de la aplicación.](doc/app-view.png)
 
-Para desarrollar el **"frontend"** de la aplicación se utilizó el lenguaje de programación **TypeScript**, que es un superconjunto de JavaScript y que esencialmente añade tipos estáticos y objetos basados en clases. Así, para poder generar código en JavaScript basta con compilar el código fuente escrito en TypeScript. Por otro lado, en cuanto al desarrollo del **"backend"** se utilizó **Express.js**, que tal cual su nombre lo indica es un "framework" de Node.js que es gratuito y "open source". A su vez, se implementó una base de datos **MySQL** junto con el gestor **phpMyAdmin**.
+Para desarrollar el **"frontend"** de la aplicación se utilizó el lenguaje de programación **TypeScript**, que es un superconjunto de JavaScript y que esencialmente añade tipos estáticos y objetos basados en clases. Así, para poder generar código en JavaScript basta con compilar el código fuente escrito en TypeScript. En cuanto al diseño del sitio, se utilizó el framework **Materialize** que se basa en la normativa de diseño Material Design elaborada por Google. Por otro lado, en cuanto al desarrollo del **"backend"** se utilizó **Express.js**, que tal cual su nombre lo indica es un "framework" de Node.js que es gratuito y "open source". A su vez, se implementó una base de datos **MySQL** junto con el gestor **phpMyAdmin**.
 
 ### Principio de funcionamiento
 
